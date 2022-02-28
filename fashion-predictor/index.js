@@ -6,7 +6,7 @@ module.exports = function (RED) {
     // load the model
     async function loadModel(config, node) {
         node.model = await tfmodel.loadModel(); // tensorflow model
-        console.log("fashion model loaded");
+        console.log("disease detection model loaded");
     }
 
     // define the node's behavior
