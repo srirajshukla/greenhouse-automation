@@ -7,6 +7,14 @@
         "info": ""
     },
     {
+        "id": "ac235fa942a4ed9a",
+        "type": "tab",
+        "label": "Segmentation",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "e3b2bcd826225690",
         "type": "serial-port",
         "serialport": "COM7",
@@ -1042,7 +1050,7 @@
         "id": "8c7e3183283c9441",
         "type": "ui_switch",
         "z": "7b56cef1f8d546dd",
-        "name": "",
+        "name": "LIGHT ui button",
         "label": "LIGHT",
         "tooltip": "",
         "group": "6b72526c2b8337cb",
@@ -1054,39 +1062,282 @@
         "topic": "topic",
         "topicType": "msg",
         "style": "",
-        "onvalue": "true",
-        "onvalueType": "bool",
+        "onvalue": "1",
+        "onvalueType": "num",
         "onicon": "",
         "oncolor": "",
-        "offvalue": "false",
-        "offvalueType": "bool",
+        "offvalue": "0",
+        "offvalueType": "num",
         "officon": "",
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 190,
-        "y": 1300,
+        "x": 600,
+        "y": 1200,
         "wires": [
             [
-                "4c76c9fc37836cc9"
+                "3cf333e629056ece"
             ]
         ]
     },
     {
-        "id": "4c76c9fc37836cc9",
-        "type": "debug",
-        "z": "7b56cef1f8d546dd",
+        "id": "732caf428b836a3b",
+        "type": "http request",
+        "z": "ac235fa942a4ed9a",
+        "name": "segment image",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "localhost:5000/api/kmeans",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 540,
+        "y": 140,
+        "wires": [
+            [
+                "7de0bd9a768c8d72"
+            ]
+        ]
+    },
+    {
+        "id": "6dcf088b2e6bbc96",
+        "type": "fileinject",
+        "z": "ac235fa942a4ed9a",
+        "name": "Input Image",
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "b27f36899696c1cf",
+                "2f3c3cb0f7bc732e"
+            ]
+        ]
+    },
+    {
+        "id": "b27f36899696c1cf",
+        "type": "function",
+        "z": "ac235fa942a4ed9a",
+        "name": "prepare image",
+        "func": "let image_b64 = msg.payload.toString('base64');\n\nmsg.headers = {\n    \"Content-Type\": \"multipart/form-data\"\n}\n\nmsg.payload = {\n    \"image\": image_b64\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 140,
+        "wires": [
+            [
+                "732caf428b836a3b"
+            ]
+        ]
+    },
+    {
+        "id": "7de0bd9a768c8d72",
+        "type": "function",
+        "z": "ac235fa942a4ed9a",
+        "name": "get segmented image",
+        "func": "var image = Buffer.from(msg.payload.status, 'base64');\nmsg.payload = image;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 140,
+        "wires": [
+            [
+                "8d679151cc4e0bf1",
+                "bc17f2ddbd573ad0"
+            ]
+        ]
+    },
+    {
+        "id": "8d679151cc4e0bf1",
+        "type": "image",
+        "z": "ac235fa942a4ed9a",
         "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 980,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2f3c3cb0f7bc732e",
+        "type": "image",
+        "z": "ac235fa942a4ed9a",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 140,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "91fc347af0e7e596",
+        "type": "fashion-predictor-node",
+        "z": "ac235fa942a4ed9a",
+        "name": "disease predictor node",
+        "x": 240,
+        "y": 520,
+        "wires": [
+            [
+                "d19e164afb7bafc6",
+                "5c47b2584e5e5d3b"
+            ]
+        ]
+    },
+    {
+        "id": "d19e164afb7bafc6",
+        "type": "debug",
+        "z": "ac235fa942a4ed9a",
+        "name": "show prediction output",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 370,
-        "y": 1280,
+        "x": 580,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "5c47b2584e5e5d3b",
+        "type": "switch",
+        "z": "ac235fa942a4ed9a",
+        "name": "check if disease present",
+        "property": "disease",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 590,
+        "y": 580,
+        "wires": [
+            [
+                "d8e5d5116eff7dab"
+            ]
+        ]
+    },
+    {
+        "id": "d8e5d5116eff7dab",
+        "type": "change",
+        "z": "ac235fa942a4ed9a",
+        "name": "create mail message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "`Disease: {msg.payload[1]} detected`",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Disease Detected ",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 520,
+        "wires": [
+            [
+                "2677b93ba8c09f30"
+            ]
+        ]
+    },
+    {
+        "id": "2677b93ba8c09f30",
+        "type": "e-mail",
+        "z": "ac235fa942a4ed9a",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "send email to user",
+        "x": 910,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "15092109bd75ac24",
+        "type": "link in",
+        "z": "ac235fa942a4ed9a",
+        "name": "",
+        "links": [
+            "bc17f2ddbd573ad0"
+        ],
+        "x": 65,
+        "y": 520,
+        "wires": [
+            [
+                "91fc347af0e7e596"
+            ]
+        ]
+    },
+    {
+        "id": "bc17f2ddbd573ad0",
+        "type": "link out",
+        "z": "ac235fa942a4ed9a",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "15092109bd75ac24"
+        ],
+        "x": 785,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "3f0555bdaa7016a5",
+        "type": "comment",
+        "z": "ac235fa942a4ed9a",
+        "name": "To Disease Predictor",
+        "info": "",
+        "x": 770,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "8e02cca65593ec1a",
+        "type": "comment",
+        "z": "ac235fa942a4ed9a",
+        "name": "From segmentation",
+        "info": "",
+        "x": 130,
+        "y": 460,
         "wires": []
     }
 ]
