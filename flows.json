@@ -176,24 +176,6 @@
         }
     },
     {
-        "id": "bb19766e60991253",
-        "type": "debug",
-        "z": "7b56cef1f8d546dd",
-        "d": true,
-        "name": "Temperature",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 490,
-        "y": 220,
-        "wires": []
-    },
-    {
         "id": "22e3c24763ea090f",
         "type": "debug",
         "z": "7b56cef1f8d546dd",
@@ -245,7 +227,7 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": true,
-        "allowrate": false,
+        "allowrate": true,
         "outputs": 1,
         "x": 520,
         "y": 280,
@@ -300,100 +282,10 @@
         ]
     },
     {
-        "id": "40a61ccbf8051dcb",
-        "type": "inject",
-        "z": "7b56cef1f8d546dd",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "1",
-        "payloadType": "num",
-        "x": 170,
-        "y": 1140,
-        "wires": [
-            [
-                "d8272ecf9e3efdfe",
-                "6f763f4ec4026049"
-            ]
-        ]
-    },
-    {
-        "id": "9061dbde50a4fc6e",
-        "type": "inject",
-        "z": "7b56cef1f8d546dd",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "0",
-        "payloadType": "num",
-        "x": 170,
-        "y": 1040,
-        "wires": [
-            [
-                "36489c4fe00771db",
-                "d80aa4472d9879c2"
-            ]
-        ]
-    },
-    {
-        "id": "36489c4fe00771db",
-        "type": "debug",
-        "z": "7b56cef1f8d546dd",
-        "name": "LIGHTS off",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "\"changed light status to OFF\"",
-        "targetType": "jsonata",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 330,
-        "y": 1020,
-        "wires": []
-    },
-    {
-        "id": "d8272ecf9e3efdfe",
-        "type": "debug",
-        "z": "7b56cef1f8d546dd",
-        "name": "LIGHTS on",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "\"Changed status light to ON\"",
-        "targetType": "jsonata",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 330,
-        "y": 1140,
-        "wires": []
-    },
-    {
         "id": "9339b078e702176f",
         "type": "debug",
         "z": "7b56cef1f8d546dd",
-        "name": "temp recieved",
+        "name": "Soil Moisture Level recieved",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -402,7 +294,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 300,
+        "x": 340,
         "y": 860,
         "wires": []
     },
@@ -568,7 +460,7 @@
         "type": "mqtt out",
         "z": "7b56cef1f8d546dd",
         "name": "",
-        "topic": "LIGHTS",
+        "topic": "IRRIGATION",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -577,67 +469,9 @@
         "correl": "",
         "expiry": "",
         "broker": "01309323766c49db",
-        "x": 840,
+        "x": 890,
         "y": 1000,
         "wires": []
-    },
-    {
-        "id": "e68af63695155db3",
-        "type": "link in",
-        "z": "7b56cef1f8d546dd",
-        "name": "",
-        "links": [
-            "d80aa4472d9879c2"
-        ],
-        "x": 625,
-        "y": 1080,
-        "wires": [
-            [
-                "3cf333e629056ece"
-            ]
-        ]
-    },
-    {
-        "id": "d80aa4472d9879c2",
-        "type": "link out",
-        "z": "7b56cef1f8d546dd",
-        "name": "",
-        "mode": "link",
-        "links": [
-            "e68af63695155db3"
-        ],
-        "x": 305,
-        "y": 1080,
-        "wires": []
-    },
-    {
-        "id": "6f763f4ec4026049",
-        "type": "link out",
-        "z": "7b56cef1f8d546dd",
-        "name": "",
-        "mode": "link",
-        "links": [
-            "f32e76543ee9192d"
-        ],
-        "x": 295,
-        "y": 1200,
-        "wires": []
-    },
-    {
-        "id": "f32e76543ee9192d",
-        "type": "link in",
-        "z": "7b56cef1f8d546dd",
-        "name": "",
-        "links": [
-            "6f763f4ec4026049"
-        ],
-        "x": 625,
-        "y": 1140,
-        "wires": [
-            [
-                "3cf333e629056ece"
-            ]
-        ]
     },
     {
         "id": "89b5a33473c36e3e",
@@ -663,12 +497,12 @@
         "led": "0",
         "awb": "auto",
         "name": "",
-        "x": 300,
-        "y": 1560,
+        "x": 460,
+        "y": 1520,
         "wires": [
             [
                 "8f536c274cab5690",
-                "e3f944db38a4aff8"
+                "cd2d354028f4401a"
             ]
         ]
     },
@@ -676,7 +510,7 @@
         "id": "27bd7c9a1394628f",
         "type": "inject",
         "z": "7b56cef1f8d546dd",
-        "name": "daily cron",
+        "name": "Take image every 10 minutes",
         "props": [
             {
                 "p": "payload"
@@ -693,8 +527,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 130,
-        "y": 1560,
+        "x": 190,
+        "y": 1520,
         "wires": [
             [
                 "89b5a33473c36e3e"
@@ -714,8 +548,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 560,
-        "y": 1640,
+        "x": 520,
+        "y": 1720,
         "wires": []
     },
     {
@@ -730,8 +564,8 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 300,
-        "y": 1720,
+        "x": 740,
+        "y": 1600,
         "wires": []
     },
     {
@@ -739,7 +573,7 @@
         "type": "mqtt in",
         "z": "7b56cef1f8d546dd",
         "name": "",
-        "topic": "CHANGESTATE/LIGHT",
+        "topic": "CHANGESTATE/IRRIGATION",
         "qos": "2",
         "datatype": "auto",
         "broker": "01309323766c49db",
@@ -747,7 +581,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 620,
+        "x": 640,
         "y": 860,
         "wires": [
             [
@@ -769,7 +603,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 840,
+        "x": 900,
         "y": 860,
         "wires": []
     },
@@ -796,8 +630,8 @@
         "seg1": "",
         "seg2": "",
         "className": "",
-        "x": 470,
-        "y": 160,
+        "x": 490,
+        "y": 220,
         "wires": []
     },
     {
@@ -843,8 +677,8 @@
         "z": "7b56cef1f8d546dd",
         "name": "Data Collection",
         "info": "",
-        "x": 940,
-        "y": 20,
+        "x": 560,
+        "y": 40,
         "wires": []
     },
     {
@@ -862,8 +696,8 @@
         "type": "fashion-predictor-node",
         "z": "7b56cef1f8d546dd",
         "name": "object detection node",
-        "x": 560,
-        "y": 1560,
+        "x": 220,
+        "y": 1740,
         "wires": [
             [
                 "db521c1a0410df39",
@@ -887,7 +721,6 @@
         "wires": [
             [
                 "d67749f42e5ea7e7",
-                "bb19766e60991253",
                 "051eed908b572a07",
                 "cac35591da8a7ea4"
             ]
@@ -971,11 +804,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 900,
-        "y": 1560,
+        "x": 580,
+        "y": 1800,
         "wires": [
             [
-                "faaef4108e04c99d"
+                "9871fbb9321dc2b2"
             ]
         ]
     },
@@ -1005,8 +838,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 840,
-        "y": 1640,
+        "x": 520,
+        "y": 1960,
         "wires": [
             [
                 "707e731ad44e3b0e",
@@ -1024,8 +857,8 @@
         "tls": true,
         "name": "",
         "dname": "send email to user",
-        "x": 830,
-        "y": 1720,
+        "x": 790,
+        "y": 2020,
         "wires": []
     },
     {
@@ -1042,15 +875,15 @@
         "correl": "",
         "expiry": "",
         "broker": "01309323766c49db",
-        "x": 550,
-        "y": 1720,
+        "x": 790,
+        "y": 1960,
         "wires": []
     },
     {
         "id": "8c7e3183283c9441",
         "type": "ui_switch",
         "z": "7b56cef1f8d546dd",
-        "name": "LIGHT ui button",
+        "name": "IRRIGATION ui button",
         "label": "LIGHT",
         "tooltip": "",
         "group": "6b72526c2b8337cb",
@@ -1072,8 +905,8 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 600,
-        "y": 1200,
+        "x": 580,
+        "y": 1140,
         "wires": [
             [
                 "3cf333e629056ece"
@@ -1085,14 +918,303 @@
         "type": "fileinject",
         "z": "7b56cef1f8d546dd",
         "name": "",
-        "x": 140,
-        "y": 1640,
+        "x": 460,
+        "y": 1600,
         "wires": [
             [
-                "e3f944db38a4aff8",
-                "8f536c274cab5690"
+                "8f536c274cab5690",
+                "cd2d354028f4401a"
             ]
         ]
+    },
+    {
+        "id": "b167837851547f3b",
+        "type": "ui_numeric",
+        "z": "7b56cef1f8d546dd",
+        "name": "Message Rate",
+        "label": "numeric",
+        "tooltip": "",
+        "group": "6b72526c2b8337cb",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "rate",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "step": "0.01",
+        "className": "",
+        "x": 260,
+        "y": 280,
+        "wires": [
+            [
+                "051eed908b572a07"
+            ]
+        ]
+    },
+    {
+        "id": "e68af63695155db3",
+        "type": "link in",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "links": [
+            "d80aa4472d9879c2"
+        ],
+        "x": 625,
+        "y": 1080,
+        "wires": [
+            [
+                "3cf333e629056ece"
+            ]
+        ]
+    },
+    {
+        "id": "f32e76543ee9192d",
+        "type": "link in",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "links": [
+            "6f763f4ec4026049"
+        ],
+        "x": 625,
+        "y": 1200,
+        "wires": [
+            [
+                "3cf333e629056ece"
+            ]
+        ]
+    },
+    {
+        "id": "40a61ccbf8051dcb",
+        "type": "inject",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 170,
+        "y": 1140,
+        "wires": [
+            [
+                "d8272ecf9e3efdfe",
+                "6f763f4ec4026049",
+                "d8272ecf9e3efdfe",
+                "6f763f4ec4026049"
+            ]
+        ]
+    },
+    {
+        "id": "9061dbde50a4fc6e",
+        "type": "inject",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 170,
+        "y": 1040,
+        "wires": [
+            [
+                "36489c4fe00771db",
+                "d80aa4472d9879c2",
+                "36489c4fe00771db",
+                "d80aa4472d9879c2"
+            ]
+        ]
+    },
+    {
+        "id": "36489c4fe00771db",
+        "type": "debug",
+        "z": "7b56cef1f8d546dd",
+        "name": "IRRIGATION off",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "\"changed light status to OFF\"",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "d8272ecf9e3efdfe",
+        "type": "debug",
+        "z": "7b56cef1f8d546dd",
+        "name": "IRRIGATION on",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "\"Changed status light to ON\"",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "d80aa4472d9879c2",
+        "type": "link out",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "e68af63695155db3"
+        ],
+        "x": 305,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "6f763f4ec4026049",
+        "type": "link out",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "f32e76543ee9192d"
+        ],
+        "x": 295,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "e8629f4e88588458",
+        "type": "play audio",
+        "z": "7b56cef1f8d546dd",
+        "name": "Play Warning Sound",
+        "voice": "0",
+        "x": 520,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "cd2d354028f4401a",
+        "type": "link out",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "fda322885b05cd40"
+        ],
+        "x": 675,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "c6e19ea7b59802ed",
+        "type": "comment",
+        "z": "7b56cef1f8d546dd",
+        "name": "To Object Detection Node",
+        "info": "",
+        "x": 850,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "fda322885b05cd40",
+        "type": "link in",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "links": [
+            "cd2d354028f4401a"
+        ],
+        "x": 55,
+        "y": 1740,
+        "wires": [
+            [
+                "e3f944db38a4aff8"
+            ]
+        ]
+    },
+    {
+        "id": "b0a4358e551795d9",
+        "type": "comment",
+        "z": "7b56cef1f8d546dd",
+        "name": "From Image Input",
+        "info": "",
+        "x": 120,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "9871fbb9321dc2b2",
+        "type": "link out",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "98609180581e09a0"
+        ],
+        "x": 855,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "955effecf203b6a3",
+        "type": "comment",
+        "z": "7b56cef1f8d546dd",
+        "name": "To Notification Section",
+        "info": "",
+        "x": 780,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "98609180581e09a0",
+        "type": "link in",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "links": [
+            "9871fbb9321dc2b2"
+        ],
+        "x": 375,
+        "y": 1960,
+        "wires": [
+            [
+                "faaef4108e04c99d",
+                "e8629f4e88588458"
+            ]
+        ]
+    },
+    {
+        "id": "195b3dbc8533491a",
+        "type": "comment",
+        "z": "7b56cef1f8d546dd",
+        "name": "From Model Prediction",
+        "info": "",
+        "x": 440,
+        "y": 1900,
+        "wires": []
     },
     {
         "id": "732caf428b836a3b",
