@@ -1,0 +1,40 @@
+<script type="text/html" data-template-name="segment-maker-node">
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  
+  <!-- <div class="form-row">
+    <label for="node-input-img"><i class="fa fa-globe"></i> file name: </label>
+    <input type="text" id="node-input-a" placeholder="0">
+  </div>
+  
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-globe"></i> A: </label>
+    <input type="text" id="node-input-b" placeholder="1">
+  </div> -->
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType('segment-maker-node', {
+    category: 'segment',
+    defaults: {
+      name: {
+        value: 'segmentation node'
+      },
+    },
+    inputs: 1,
+    outputs: 1,
+    paletteLabel: 'segmentation node',
+    color: '#fa9200',
+    label: function () {
+      return this.name || 'segmentation node';
+    }
+  });
+</script>
+
+<script type="text/html" data-help-name="segment-maker-node">
+  <p>A TensorFlow.js node to run prediction using a custom model for crop disease detection.</p>
+  <p>The node accepts an image buffer and outputs a JSON prediction object.</p>
+</script>

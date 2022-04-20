@@ -1,0 +1,24 @@
+{
+    "name": "segment-maker",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "peerDependencies": {
+        "@tensorflow/tfjs-node": "^3.11.0",
+        "tf-kmeans": "^0.0.3"
+    },
+    "node-red": {
+        "nodes": {
+            "segment-maker-node": "index.js"
+        }
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/sharp": "^0.30.0",
+        "sharp": "^0.30.3"
+    }
+}

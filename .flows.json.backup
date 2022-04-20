@@ -37,7 +37,7 @@
         "id": "01309323766c49db",
         "type": "mqtt-broker",
         "name": "mqbroker",
-        "broker": "192.168.43.114",
+        "broker": "192.168.43.113",
         "port": "5167",
         "clientid": "",
         "autoConnect": true,
@@ -686,8 +686,8 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
-        "crontab": "00 12 * * *",
+        "repeat": "600",
+        "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
@@ -861,7 +861,7 @@
         "id": "e3f944db38a4aff8",
         "type": "fashion-predictor-node",
         "z": "7b56cef1f8d546dd",
-        "name": "disease predictor node",
+        "name": "object detection node",
         "x": 560,
         "y": 1560,
         "wires": [
@@ -958,20 +958,20 @@
         "id": "c1709d76b9a6914d",
         "type": "switch",
         "z": "7b56cef1f8d546dd",
-        "name": "check if disease present",
-        "property": "disease",
+        "name": "check if unwanted object object is present",
+        "property": "className",
         "propertyType": "msg",
         "rules": [
             {
                 "t": "eq",
-                "v": "true",
+                "v": "soccer ball",
                 "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 850,
+        "x": 900,
         "y": 1560,
         "wires": [
             [
@@ -1079,6 +1079,36 @@
                 "3cf333e629056ece"
             ]
         ]
+    },
+    {
+        "id": "6876243c96ecbe6d",
+        "type": "fileinject",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "x": 100,
+        "y": 1660,
+        "wires": [
+            [
+                "80511e06df1807e9",
+                "e3f944db38a4aff8"
+            ]
+        ]
+    },
+    {
+        "id": "80511e06df1807e9",
+        "type": "image",
+        "z": "7b56cef1f8d546dd",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 120,
+        "y": 1740,
+        "wires": []
     },
     {
         "id": "732caf428b836a3b",

@@ -41,14 +41,17 @@ module.exports = function (RED) {
         node.on("input", function (msg) {
             // preprocess the incoming image
             console.log("sending input data to be processed");
-            const inputTensor = tfmodel.processInput(msg.payload);
+            // const inputTensor = tfmodel.processInput(msg.payload);
+            const inputTensor = tfmodel.preprocess(msg.payload);
 
-            inputTensor.print();
+            // inputTensor.print();
             // get the prediction
 
             const prediction = node.model.predict(inputTensor)
-            console.log("prediction=", prediction)
-            msg.payload = tfmodel.processOutput(prediction);
+            // console.log("prediction=", prediction)
+            tfmodel.processOutput(prediction).then(function(prediction) {
+                msg.payload = prediction
+            });
             // send the prediction out
             node.send(msg);
         

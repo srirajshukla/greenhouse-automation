@@ -10,8 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-red": "^2.1.4",
     "@tensorflow/tfjs-node": "^3.11.0",
-    "fashion-predictor": "file:fashion-predictor"
+    "fashion-predictor": "file:fashion-predictor",
+    "node-red": "^2.1.4",
+    "segment-maker": "file:segment-maker",
+    "tf-kmeans": "^0.0.3"
   }
 }
